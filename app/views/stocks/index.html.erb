@@ -1,0 +1,28 @@
+<h1>Stocker</h1>
+
+<div class="container">
+
+  <div class="datepicker">
+    <%= form_tag("/stocks", method: "get") do %>
+      <%= date_field(:stocks_date, :date) %>
+      <%= submit_tag("filter!") %>
+    <% end %> <br>
+  </div>
+  
+  <table id="stocks_table">
+    <thead>
+      <tr>
+        <th>Symbol</th>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Predicted Behave</th>
+        <th>Actual Behave</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%=render @stocks %>
+    </tbody>
+  </table>
+</div>
+
+
