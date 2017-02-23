@@ -8,7 +8,7 @@
       <%= submit_tag("filter!") %>
     <% end %> <br>
   </div>
-  
+
   <table id="stocks_table">
     <thead>
       <tr>
@@ -20,7 +20,15 @@
       </tr>
     </thead>
     <tbody>
-      <%=render @stocks %>
+    <%= @stocks.each do |stock| %>
+      <tr>
+        <td><%=stock[:symbol]%></td>
+        <td><%=stock[:name]%></td>
+        <td><%=stock[:values][:date]%></td>
+        <td><%=render partial: "arrow_image", locals: {:value => stock[:values][:sentimental_grade]}%></td>
+        <td><%=render partial: "arrow_image", locals: {:value => (stock[:values][:stock_change])}%></td>
+      </tr>
+    <%end%>
     </tbody>
   </table>
 </div>

@@ -10,7 +10,11 @@ class Stock
   end
 
   def self.get_stocks_by_date(date)
-    self.where("values.date" => date)
+    unwind = {"$unwind" => "$values"}
+    sort = {"$sort" => {"symbol" => 1}}
+    matchm = {"$match" => {"values.date" => date}}
+
+    self.collection.aggregate([unwind, sort, matchm])
   end
 
   def self.get_stock_by_symbol(symbol)

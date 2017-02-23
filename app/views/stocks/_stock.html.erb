@@ -1,7 +1,0 @@
-<tr>
-  <td><%=stock[:symbol]%></td>
-  <td><%=stock[:name]%></td>
-  <td><%=stock[:values].first[:date]%></td>
-  <td><%=render partial: "arrow_image", locals: {:value => stock[:values].first[:sentimental_grade]}%></td>
-  <td><%=render partial: "arrow_image", locals: {:value => (stock[:values].first[:stock_change])}%></td>
-</tr>
