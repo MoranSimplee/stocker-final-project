@@ -64,7 +64,7 @@ class TwitterStreamer
       @stocks_daily_data.each do |stock_daily_data|
         if (stock_daily_data[:count] != 0)
           stock_document = Stock.get_stock_by_symbol(stock_daily_data[:symbol])
-          stock_document.values.create(date: Time.new.strftime("%d-%m-%Y"), 
+          stock_document.values.create(date: Date.today.to_s, 
                                        sentimental_grade: calc_value(stock_daily_data[:grade], stock_daily_data[:count]), 
                                        stock_change: get_stock_change(stock_daily_data[:symbol]))
         end
