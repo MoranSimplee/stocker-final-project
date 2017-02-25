@@ -11,7 +11,7 @@ class StocksController < ApplicationController
     end
 
     @stocks = Stock.get_stocks_by_date(date)
-    # byebug
+
     respond_with(@stocks) do |format|
       format.html 
     end

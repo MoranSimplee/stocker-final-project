@@ -20,7 +20,8 @@ class TwitterStreamer
 
   def self.run
     init_analyzer
-    init_daily_hash
+    init_key_words_array
+    init_daily_data_array
     run_twitter_analyzer  
   end
 
@@ -29,17 +30,16 @@ class TwitterStreamer
   def self.init_analyzer
     @analyzer.load_defaults
     @analyzer.threshold = 0.1
+  end
 
+  def self.init_key_words_array
     # Track twitter by the stocks symbols hashtags
     @twitter_key_words = Stock.all_stocks_symbols.map{|symbol| "#" + symbol}
     @twitter_key_words = @twitter_key_words.join(",")
-    byebug 
   end
 
-  def self.init_daily_hash
-    Stock.all.each do |stock|
-      @stocks_daily_data << {symbol: stock[:symbol], count: 0, grade: 0}
-    end
+  def self.init_daily_data_array
+    @stocks_daily_data = Stock.all_stocks_symbols.map{|s| {symbol:s, count:0, grade:0}}
   end
 
   def self.run_twitter_analyzer
@@ -49,7 +49,6 @@ class TwitterStreamer
           stock[:count] += 1
           stock[:grade] += @analyzer.score tweet.text              
         end
-        puts tweet.text
       end
 
       update_mongo
