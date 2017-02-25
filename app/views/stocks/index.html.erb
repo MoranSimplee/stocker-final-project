@@ -20,7 +20,7 @@
       </tr>
     </thead>
     <tbody>
-    <%= @stocks.each do |stock| %>
+    <% @stocks.each do |stock| %>
       <tr>
         <td><%=stock[:symbol]%></td>
         <td><%=stock[:name]%></td>
